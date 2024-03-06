@@ -277,7 +277,7 @@ step_start "Enviroment" "Setting up" "Setup"
 step_start "Frontend" "Building" "Built"
   cd ./frontend
   export NODE_ENV=development
-  yarn cache clean --silent --force >$__OUTPUT
+  yarn cache clean >$__OUTPUT
   yarn install --silent --network-timeout=30000 >$__OUTPUT 
   yarn build >$__OUTPUT 
   cp -r dist/* /app/frontend
@@ -301,7 +301,7 @@ step_start "Services" "Starting" "Started"
   svc_add npm
 
 step_start "Enviroment" "Cleaning" "Cleaned"
-  yarn cache clean --silent --force >$__OUTPUT
+  yarn cache clean >$__OUTPUT
   # find /tmp -mindepth 1 -maxdepth 1 -not -name nginx -exec rm -rf '{}' \;
   if [ "$EPS_CLEANUP" = true ]; then
     pkg_del "$EPS_DEPENDENCIES"
