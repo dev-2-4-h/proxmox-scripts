@@ -208,6 +208,7 @@ step_start "Yarn"
   ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg
   rm -rf "$GNUPGHOME" yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
   step_end "Yarn ${CLR_CYB}v$YARN_VERSION${CLR} ${CLR_GN}Installed"
+  yarn config set cache-folder /usr/local/share/.cache/yarn/v6
 
 step_start "Nginx Proxy Manager" "Downloading" "Downloaded"
   NPM_VERSION=$(os_fetch -O- https://api.github.com/repos/NginxProxyManager/nginx-proxy-manager/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
@@ -277,8 +278,6 @@ step_start "Enviroment" "Setting up" "Setup"
 step_start "Frontend" "Building" "Built"
   cd ./frontend
   export NODE_ENV=development
-  mkdir /tmp/yarn
-  yarn config set cache-folder /tmp/yarn
   yarn cache clean >$__OUTPUT
   yarn install --silent --network-timeout=30000 >$__OUTPUT 
   yarn build >$__OUTPUT 
