@@ -208,7 +208,7 @@ step_start "Yarn"
   ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg
   rm -rf "$GNUPGHOME" yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
   step_end "Yarn ${CLR_CYB}v$YARN_VERSION${CLR} ${CLR_GN}Installed"
-  yarn config set cache-folder /usr/local/share/.cache/yarn/v6
+  YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn/v6
 
 step_start "Nginx Proxy Manager" "Downloading" "Downloaded"
   NPM_VERSION=$(os_fetch -O- https://api.github.com/repos/NginxProxyManager/nginx-proxy-manager/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
