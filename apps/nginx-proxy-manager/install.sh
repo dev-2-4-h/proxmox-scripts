@@ -277,6 +277,8 @@ step_start "Enviroment" "Setting up" "Setup"
 step_start "Frontend" "Building" "Built"
   cd ./frontend
   export NODE_ENV=development
+  mkdir /tmp/yarn
+  yarn config set cache-folder /tmp/yarn
   yarn cache clean >$__OUTPUT
   yarn install --silent --network-timeout=30000 >$__OUTPUT 
   yarn build >$__OUTPUT 
