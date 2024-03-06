@@ -208,6 +208,7 @@ step_start "Yarn"
   ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg
   rm -rf "$GNUPGHOME" yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
   step_end "Yarn ${CLR_CYB}v$YARN_VERSION${CLR} ${CLR_GN}Installed"
+  mkdir /usr/local/share/.cache
   mkdir /usr/local/share/.cache/yarn/
   YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn/
 
