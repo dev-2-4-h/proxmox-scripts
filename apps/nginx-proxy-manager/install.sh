@@ -208,10 +208,13 @@ step_start "Yarn"
   ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg
   rm -rf "$GNUPGHOME" yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
   step_end "Yarn ${CLR_CYB}v$YARN_VERSION${CLR} ${CLR_GN}Installed"
-  mkdir /usr/local/share/.cache
-  mkdir /usr/local/share/.cache/yarn/
-  YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn/
-
+  dir_path="/usr/local/share/.cache"
+  if [ -d "$dir_path" ]; then
+    rm -rf "$dir_path"
+  fi
+  mkdir -p "$dir_path"
+  mkdir -p "$dir_path/yarn"
+  export YARN_CACHE_FOLDER="$dir_path/yarn"
 step_start "Nginx Proxy Manager" "Downloading" "Downloaded"
   NPM_VERSION=$(os_fetch -O- https://api.github.com/repos/NginxProxyManager/nginx-proxy-manager/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
   os_fetch -O- https://codeload.github.com/NginxProxyManager/nginx-proxy-manager/tar.gz/v$NPM_VERSION | tar -xz
